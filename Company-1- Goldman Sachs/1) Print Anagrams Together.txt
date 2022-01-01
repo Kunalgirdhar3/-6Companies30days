@@ -1,0 +1,29 @@
+class Solution {
+    public List<List<String>> Anagrams(String[] str) {
+        // Code here
+        List<List<String>> ans = new ArrayList<>();
+
+        HashMap<String, List<String>> mp = new HashMap<>();
+        for (int i = 0; i < str.length; i++) {
+            String word = str[i];
+            char[] l = word.toCharArray();
+            Arrays.sort(l);
+            String newWord = new String(l);
+            if(mp.containsKey(newWord)){
+                mp.get(newWord).add(word);
+            }else{
+                List<String> words = new ArrayList<>();
+                words.add(word);
+                mp.put(newWord,words);
+            }
+        }
+        
+        for (String s : mp.keySet()){
+            List<String> val = mp.get(s);
+            ans.add(val);
+        }
+        
+        
+        return ans;
+    }
+}
