@@ -1,0 +1,21 @@
+
+class Solution {
+    /* Function to get the nth ugly number*/
+    long getNthUglyNo(int n) {
+        // code here
+        long[] arr = new long[n];
+        arr[0]=1;
+        int m2=0,m3=0,m5=0;
+        long n2,n3,n5;
+        for(int i=1;i<n;i++){
+            n2=arr[m2]*2;
+            n3=arr[m3]*3;
+            n5=arr[m5]*5;
+            arr[i]=Math.min(Math.min(n2,n3),n5);
+            if(arr[i]==n2) m2++;
+            if(arr[i]==n3) m3++;
+            if(arr[i]==n5) m5++;
+        }
+        return arr[n-1];
+    }
+}
