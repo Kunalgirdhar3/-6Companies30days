@@ -1,0 +1,29 @@
+//User function Template for Java
+
+
+class Solution
+{
+    int mod=1000000007;
+    public int CountWays(String str)
+    {
+        // code here
+        char[] arr = str.toCharArray();
+        int n=str.length();
+        if(n==0 || arr[0]=='0') return 0;
+        if(n==1) return 1;
+        
+        int tmp1=1;
+        int tmp2=1;
+        for(int i=1;i<n;i++){
+            int d1=arr[i]-'0';
+            int d2=(arr[i-1]-'0')*10+d1;
+            int v=0;
+            if(d1>=1) v=(v+tmp2)%mod;
+            if(d2>9 && d2<27) v=(v+tmp1)%mod;
+            tmp1=tmp2;
+            tmp2=v;
+        }
+        return tmp2%mod;
+    }
+    
+}
