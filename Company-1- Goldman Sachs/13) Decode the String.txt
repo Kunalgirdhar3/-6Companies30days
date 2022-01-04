@@ -1,0 +1,23 @@
+//User function Template for Java
+
+
+class Solution{
+    static String decodedString(String s){
+        // code here
+        StringBuilder sb = new StringBuilder();
+        int cnt=0,idx=-1;
+        char[] arr = s.toCharArray();
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]=='[' && ++cnt==1) idx=i;
+            if(arr[i]==']' && --cnt==0){
+                int st=idx-1;
+                while(st>=0 && Character.isDigit(arr[st])) st--;
+                int rep=Integer.parseInt(s.substring(st+1,idx));
+                sb.append(decodedString(s.substring(idx+1,i)).repeat(rep));
+                idx=-1;
+            }
+            if(idx==-1 && Character.isAlphabetic(arr[i])) sb.append(arr[i]);
+        }
+        return sb.toString();
+    }
+}
