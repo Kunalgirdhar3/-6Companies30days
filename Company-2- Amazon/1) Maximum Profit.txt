@@ -1,0 +1,26 @@
+// User function Template for Java
+
+
+
+class Solution {
+    static int maxProfit(int k, int n, int a[]) {
+        // code here
+        int[][] pro = new int[k+1][n+1];
+        for(int i=0;i<=k;i++) pro[i][0]=0;
+        for(int i=0;i<=n;i++) pro[0][i]=0;
+        for(int i=1;i<=k;i++){
+            int m=Integer.MIN_VALUE;
+            for(int j=1;j<n;j++){
+                // int m=0;
+                
+                // for(int t=0;t<j;k++){
+                //     m=Math.max(m,a[j]-a[t]+pro[i-1][t]);
+                //     pro[i][j]=Math.max(m,pro[i][j-1]);
+                // }
+                m=Math.max(m,pro[i-1][j-1]-a[j-1]);
+                pro[i][j]=Math.max(a[j]+m,pro[i][j-1]);
+            }
+        }
+        return pro[k][n-1];
+    }
+}
