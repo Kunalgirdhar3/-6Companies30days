@@ -1,0 +1,46 @@
+//User function Template for Java
+
+
+class Solution
+{
+    /*class Node {
+    	int data;
+    	Node left;
+    	Node right;
+    
+    	Node(int data) {
+    		this.data = data;
+    		left = null;
+    		right = null;
+    	}
+    }*/
+    
+    static Node st;
+    static Map<Node,Node> mp=new HashMap<>();
+    static void dfs(Node root,Node parent,int t){
+        if(root==null) return;
+        mp.put(root,parent);
+        if(root.data==t) st=root;
+        dfs(root.left,root,t);
+        dfs(root.right,root,t);
+    }
+    static int ans=0;
+    static void rec(Node root,ArrayList<Node> check,int d){
+        if(root==null) return;
+        if(check.contains(root)) return;
+        check.add(root);
+        ans=Math.max(ans,d);
+        rec(root.left,check,d+1);
+        rec(root.right,check,d+1);
+        rec(mp.get(root),check,d+1);
+    }
+    
+    public static int minTime(Node root, int target) 
+    {
+        // Your code goes here
+        dfs(root,null,target);
+        ArrayList<Node> check=new ArrayList<>();
+        rec(st,check,0);
+        return ans;
+    }
+}
