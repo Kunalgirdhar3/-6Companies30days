@@ -1,0 +1,36 @@
+/*Complete the given function
+Node is as follows:
+class Tree{
+	int data;
+	Tree left,right;
+	Tree(int d){
+		data=d;
+		left=right=null;
+	}
+}*/
+
+class Tree 
+{
+    //Function to serialize a tree and return a list containing nodes of tree.
+	public void serialize(Node root, ArrayList<Integer> A) 
+	{
+	    //code here
+	    if(root==null) return;
+	    serialize(root.left,A);
+	    A.add(root.data);
+	    serialize(root.right,A);
+	}
+	
+	//Function to deserialize a list and construct the tree.
+    public Node deSerialize(ArrayList<Integer> A)
+    {
+        //code here
+        Node root = new Node(0);
+        Node tmp=root;
+        for(int i=0;i<A.size();i++){
+            tmp.right=new Node(A.get(i));
+            tmp=tmp.right;
+        }
+        return root.right;
+    }
+};

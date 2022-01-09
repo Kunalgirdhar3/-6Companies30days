@@ -1,0 +1,16 @@
+//User function Template for Java
+
+
+
+class Solution {
+    void matchPairs(char nuts[], char bolts[], int n) {
+        // code here
+        HashMap<Character,Integer> mp = new HashMap<>();
+        for(int i=0;i<n;i++) mp.put(nuts[i],i);
+        for(int i=0;i<n;i++){
+            if(mp.containsKey(bolts[i])) nuts[i]=bolts[i];
+        }
+        Arrays.sort(nuts);
+        Arrays.sort(bolts);
+    }
+}
