@@ -1,0 +1,33 @@
+//User function Template for Java
+
+
+/*class Node
+{
+    int data;
+    Node left,right;
+    Node(int d)
+    {
+        data=d;
+        left=right=null;
+    }
+}*/
+
+
+class Tree
+{
+    int ans;
+    //Function to count number of subtrees having sum equal to given sum.
+    int countSubtreesWithSumX(Node root, int X)
+    {
+	//Add your code here.
+	    ans=0;
+	    solve(root,X);
+	    return ans;
+    }
+    int solve(Node root, int x){
+        if(root==null) return 0;
+        int sum=root.data+solve(root.left,x)+solve(root.right,x);
+        if(sum==x) ans++;
+        return sum;
+    }
+}
