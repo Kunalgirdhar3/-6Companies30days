@@ -1,0 +1,34 @@
+//User function Template for Java
+
+
+class Solution {
+    public boolean isPossible(int n, int[][] arr)
+    {
+        // Your Code goes here
+        ArrayList<HashSet<Integer>> gp = new ArrayList<>();
+        for(int i=0;i<n;i++) gp.add(new HashSet<Integer>());
+        makeGraph(n,arr,gp);
+        int[] vis=new int[n];
+        int[] onPath = new int[n];
+        for(int i=0;i<n;i++){
+            if(vis[i]==0 && dfs(gp,i,onPath,vis)) return false;
+        }
+        return true;
+    }
+    
+    public void makeGraph(int n, int[][] arr, ArrayList<HashSet<Integer>> gp){
+        for(int i=0;i<arr.length;i++){
+            gp.get(arr[i][1]).add(arr[i][0]);
+        }
+    }
+    
+    public boolean dfs(ArrayList<HashSet<Integer>> gp, int node, int[] onPath, int[] vis){
+        if(vis[node]==1) return false;
+        onPath[node]=1;
+        vis[node]=1;
+        for(Integer a : gp.get(node)) if(onPath[a]==1 || dfs(gp,a,onPath,vis)) return true;
+        onPath[node]=0;
+        return false;
+    }
+    
+}

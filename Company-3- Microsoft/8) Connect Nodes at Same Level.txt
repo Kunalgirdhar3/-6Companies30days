@@ -1,0 +1,44 @@
+//User function Template for Java
+
+ /*
+    Node class is Defined as follows:
+    class Node{
+        int data;
+        Node left;
+        Node right;
+        Node nextRight;
+        Node(int data){
+            this.data = data;
+            left=null;
+            right=null;
+            nextRight = null;
+        }
+    }
+    */
+    
+class Solution
+{
+    //Function to connect nodes at same level.
+    public void connect(Node root)
+    {
+        // Your code goes here.
+        Queue<Node> q = new LinkedList<>();
+        Node tmp;
+        q.add(root);
+        while(!q.isEmpty()){
+            tmp=null;
+            int cnt=q.size();
+            for(int i=0;i<cnt;i++){
+                Node curr=q.poll();
+                if(i==0) tmp=curr;
+                else{
+                    tmp.nextRight=curr;
+                    tmp=curr;
+                }
+                if(curr.left!=null) q.add(curr.left);
+                if(curr.right!=null) q.add(curr.right);
+            }
+        }
+        
+    }
+}

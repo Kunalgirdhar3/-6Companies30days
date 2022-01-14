@@ -1,0 +1,32 @@
+class Solution
+{
+    //Function to find unit area of the largest region of 1s.
+    public int findMaxArea(int[][] grid)
+    {
+        // Code here
+        int ans=0;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==1){
+                    int num=search(i,j,grid);
+                    ans=Math.max(num,ans);
+                }
+            }
+        }
+        return ans;
+    }
+    public int search(int i, int j, int[][] arr){
+        if(i<0 || j<0 || i>=arr.length || j>=arr[0].length || arr[i][j]==0) return 0;
+        arr[i][j]=0;
+        int sum=0;
+        sum += search(i+1,j,arr);
+       sum += search(i,j+1,arr);
+       sum += search(i,j-1,arr);
+       sum += search(i-1,j,arr);
+       sum += search(i+1,j+1,arr);
+       sum += search(i-1,j-1,arr);
+       sum += search(i+1,j-1,arr);
+       sum += search(i-1,j+1,arr);
+       return sum + 1;
+    }
+}
