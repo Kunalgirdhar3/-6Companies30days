@@ -1,0 +1,11 @@
+//User function Template for Java
+
+class Solution{
+    static int minSteps(int D){
+        // code here
+        int steps=0,sum=0;
+        while(sum<D) sum+=steps++;
+        while((sum-D)%2==1) sum+=steps++;
+        return steps-1;
+    }
+}

@@ -1,0 +1,39 @@
+// User function Template for Java
+
+class Solution
+{
+    //Function to find if the given edge is a bridge in graph.
+    static int isBridge(int v, ArrayList<ArrayList<Integer>> adj,int c,int d)
+    {
+        // code here
+        boolean[] vis = new boolean[v];
+        int[] toi=new int[v];
+        int[] lt=new int[v];
+        int t=0;
+        for(int i=0;i<v;i++){
+            if(!vis[i]){
+                if(check(i,-1,vis,toi,lt,adj,t,c,d)) return 1;
+            }
+        }
+        return 0;
+    }
+    static boolean check(int node, int parent, boolean[] vis, int[] toi, int[] lt, ArrayList<ArrayList<Integer>> adj, int t, int c, int d){
+        vis[node]=true;
+        toi[node]=lt[node]=t++;
+        ArrayList<Integer> children=adj.get(node);
+        for(Integer child : children){
+            if(child==parent) continue;
+            if(!vis[child]){
+                if(check(child,node,vis,toi,lt,adj,t,c,d)) return true;
+                lt[node]=Math.min(lt[node],lt[child]);
+                if(lt[child]>toi[node]){
+                    if((child==c && node==d) || (child==d && node==c)) return true;
+                }
+            }
+            else{
+                lt[node]=Math.min(lt[node],toi[child]);
+            }
+        }
+        return false;
+    }
+}
