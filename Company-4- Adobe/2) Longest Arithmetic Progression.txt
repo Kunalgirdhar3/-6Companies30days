@@ -1,0 +1,19 @@
+//User function Template for Java
+
+
+class Solution {
+    int lengthOfLongestAP(int[] a, int n) {
+        // code here
+        HashMap<Integer,Integer>[] dp = new HashMap[n];
+        int ans = Integer.MIN_VALUE;
+        for(int i=0;i<a.length;i++){
+            dp[i]=new HashMap<>();
+            for(int j=0;j<i;j++){
+                int dif=a[i]-a[j];
+                dp[i].put(dif,dp[j].getOrDefault(dif,1)+1);
+                ans=Math.max(dp[i].get(dif),ans);
+            }
+        }
+        return ans==Integer.MIN_VALUE?1:ans;
+    }
+}
