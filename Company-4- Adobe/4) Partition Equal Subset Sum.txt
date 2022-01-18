@@ -1,0 +1,24 @@
+// User function Template for Java
+
+
+class Solution{
+    static int equalPartition(int n, int arr[])
+    {
+        // code here
+        int s=0;
+        for(int a:arr) s+=a;
+        if(s%2==1) return 0;
+        s/=2;
+        int[][] dp = new int[n+1][s+1];
+        for(int j=0;j<=s;j++) dp[0][j]=0;
+        for(int i=0;i<=n;i++) dp[i][0]=1;
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=s;j++){
+                if(arr[i-1]<=j){
+                    if(dp[i-1][j-arr[i-1]]==1 || dp[i-1][j]==1) dp[i][j]=1;
+                }else dp[i][j]=dp[i-1][j];
+            }
+        }
+        return dp[n][s];
+    }
+}

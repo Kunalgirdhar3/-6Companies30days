@@ -1,0 +1,29 @@
+//User function Template for Java
+
+
+class Solution {
+    
+    public List<String> AllParenthesis(int n) 
+    {
+        // Write your code here
+        List<String> ans=new ArrayList<>();
+        solve("",n,n,ans);
+        return ans;
+    }
+    public void solve(String p, int o, int c, List<String> ans){
+        if(o==0 && c==0){
+            ans.add(p);
+            return;
+        }
+        else if(o<0 || c<0) return;
+        
+            
+                solve(p+"(",o-1,c,ans);
+            
+            if(o<c){
+               
+                solve(p+")",o,c-1,ans);
+            }
+    }
+    
+}
