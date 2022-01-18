@@ -1,0 +1,25 @@
+//User function template for JAVA
+
+
+/*You are required to complete this method */
+class Solution
+{
+    int atoi(String str) {
+	// Your code here
+	    int ans=0,i=0;
+	    boolean flag=false;
+	    int n=str.length();
+	    while(i<n){
+	        if(i==0 && str.charAt(i)=='-'){
+	            flag=true;
+	            i++;
+	            continue;
+	        }
+	        if(str.charAt(i)<'0' || str.charAt(i)>'9') return -1;
+	        int tmp=str.charAt(i)-'0';
+	        ans=ans*10+tmp;
+	        i++;
+	    }
+	    return flag?(-1*ans):ans;
+    }
+}
