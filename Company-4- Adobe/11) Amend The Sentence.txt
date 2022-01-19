@@ -1,0 +1,18 @@
+//User function Template for Java
+
+
+ class Solution{
+    public String amendSentence(String s){
+        //code here
+        String ans="";
+        char ch = s.charAt(0);
+        if(Character.isUpperCase(ch)) ch=Character.toLowerCase(ch);
+        ans+=ch;
+        for(int i=1;i<s.length();i++){
+            if(Character.isUpperCase(s.charAt(i))){
+                ans=ans+" "+Character.toLowerCase(s.charAt(i));
+            }else ans+=s.charAt(i);
+        }
+        return ans;
+    }
+}
