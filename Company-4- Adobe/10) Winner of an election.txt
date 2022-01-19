@@ -1,0 +1,30 @@
+//User function Template for Java
+
+
+class Solution
+{
+    //Function to return the name of candidate that received maximum votes.
+    public static String[] winner(String arr[], int n)
+    {
+        // add your code
+        Map<String,Integer> mp=new HashMap<>();
+        for(String name:arr){
+            if(mp.containsKey(name)) mp.put(name,mp.get(name)+1);
+            else mp.put(name,1);
+        }
+        String w=null;
+        int v=0;
+        for(Map.Entry<String,Integer> entry:mp.entrySet()){
+            if(w==null){
+                w=entry.getKey();
+                v=entry.getValue();
+            }else if(v<entry.getValue()){
+                w=entry.getKey();
+                v=entry.getValue();
+            }else if(v==entry.getValue() && w.compareTo(entry.getKey())>0){
+                w=entry.getKey();
+            }
+        }
+        return new String[] {w,String.valueOf(v)};
+    }
+}

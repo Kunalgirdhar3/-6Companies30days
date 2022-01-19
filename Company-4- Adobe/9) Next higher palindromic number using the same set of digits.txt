@@ -1,0 +1,43 @@
+//User function Template for Java
+
+
+class Solution
+{
+    public String nextPalin(String n) 
+    { 
+        //complete the function here
+        if(n.length()<=3) return "-1";
+        char[] num=n.toCharArray();
+        char tmp;
+        int l=num.length;
+        int mid=l/2-1;
+        int i,j;
+        for(i=mid-1;i>=0;i--){
+            if(num[i]<num[i+1]) break;
+        }
+        if(i<0) return "-1";
+        int s=i+1;
+        for(j=i+2;j<=mid;j++){
+            if(num[j]>num[i] && num[j]<=num[s]) s=j;
+        }
+        tmp=num[i];
+        num[i]=num[s];
+        num[s]=tmp;
+        tmp=num[l-i-1];
+        num[l-i-1]=num[l-s-1];
+        num[l-s-1]=tmp;
+        reverse(num,i+1,mid);
+        if(l%2==0) reverse(num,mid+1,l-i-2);
+        else reverse(num,mid+2,l-i-2);
+        return String.valueOf(num);
+    }
+    void reverse(char[] num, int i, int j){
+        while(i<j){
+            char tmp=num[i];
+            num[i]=num[j];
+            num[j]=tmp;
+            i++;
+            j--;
+        }
+    }
+}
