@@ -1,0 +1,23 @@
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int s=0,e=0;
+        for(int i=0;i<weights.length;i++){
+            s=Math.max(s,weights[i]);
+            e+=weights[i];
+        }
+        while(s<e){
+            int m=s+(e-s)/2;
+            int total=0;
+            int d=1;
+            for(int w:weights){
+                if(total+w>m){
+                    total=w;
+                    d++;
+                }else total+=w;
+            }
+            if(d>days) s=m+1;
+            else e=m;
+        }
+        return e;
+    }
+}
