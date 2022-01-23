@@ -1,0 +1,36 @@
+/*Complete the function below*/
+class GfG
+{
+	public int missingNumber(String s)
+       {
+            //add code here.
+            if(s.length()==1) return -1;
+            for(int i=1;i<=Math.min(6,s.length());i++){
+                int curr=Integer.parseInt(s.substring(0,i));
+                int ans=missing(s.substring(i),curr,false);
+                if(ans!=-1) return ans;
+            }
+            return -1;
+        }
+    int missing(String s,int prev, boolean bool){
+        if(s.equals("")){
+            if(bool) return 0;
+            return -1;
+        }
+        if(bool){
+            String curr=""+(prev+1);
+            if(s.startsWith(curr)) return missing(s.substring(curr.length()),prev+1,bool);
+            else return -1;
+        }else{
+            String curr=""+(prev+1);
+            if(s.startsWith(curr)) return missing(s.substring(curr.length()),prev+1,bool);
+            else{
+                curr=(prev+2)+"";
+                if(s.startsWith(curr)){
+                    if(missing(s.substring(curr.length()),prev+2,true)==0) return prev+1;
+                    else return -1;
+                }else return -1;
+            }
+        }
+    }
+}

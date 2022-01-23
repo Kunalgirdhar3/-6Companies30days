@@ -1,0 +1,24 @@
+class Solution
+{
+    public boolean isWordExist(char[][] board, String word)
+    {
+        // Code here
+        boolean[][] bool = new boolean[board.length][board[0].length];
+        char[] words=word.toCharArray();
+        for(int i=0;i<board.length;i++){
+            for(int j=0;j<board[0].length;j++){
+                if(solve(board,bool,words,i,j,0)) return true;
+            }
+        }
+        return false;
+    }
+    boolean solve(char[][] board, boolean[][] bool, char[] words, int x, int y, int idx){
+        if(idx==words.length) return true;
+        if(x<0 || x>=board.length || y<0 || y>=board[0].length || bool[x][y]) return false;
+        if(board[x][y]!=words[idx]) return false;
+        bool[x][y]=true;
+        boolean pos = solve(board,bool,words,x+1,y,idx+1) || solve(board,bool,words,x-1,y,idx+1) || solve(board,bool,words,x,y+1,idx+1) || solve(board,bool,words,x,y-1,idx+1);
+        bool[x][y]=false;
+        return pos;
+    }
+}
