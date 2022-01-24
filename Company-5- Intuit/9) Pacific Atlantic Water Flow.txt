@@ -1,0 +1,31 @@
+class Solution {
+    int[][] dir={{1,0},{-1,0},{0,1},{0,-1}};
+    public List<List<Integer>> pacificAtlantic(int[][] heights) {
+        List<List<Integer>> ans=new ArrayList<>();
+        if(heights==null || heights.length==0 || heights[0].length==0) return ans;
+        int r=heights.length;
+        int c=heights[0].length;
+        boolean[][] at=new boolean[r][c];
+        boolean[][] pa=new boolean[r][c];
+        for(int i=0;i<c;i++){
+            dfs(heights,0,i,Integer.MIN_VALUE,pa);
+            dfs(heights,r-1,i,Integer.MIN_VALUE,at);
+        }
+        for(int i=0;i<r;i++){
+            dfs(heights,i,0,Integer.MIN_VALUE,pa);
+            dfs(heights,i,c-1,Integer.MIN_VALUE,at);
+        }
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                if(pa[i][j] && at[i][j]) ans.add(Arrays.asList(i,j));
+            }
+        }
+        return ans;
+    }
+    void dfs(int[][] heights,int i, int j,int prev, boolean[][] o){
+        if(i<0 || j<0 || i>=o.length || j>=o[i].length) return;
+        if(heights[i][j]<prev || o[i][j]) return;
+        o[i][j]=true;
+        for(int[] d:dir) dfs(heights,i+d[0],j+d[1],heights[i][j],o);
+    }
+}
